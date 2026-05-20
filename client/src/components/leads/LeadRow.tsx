@@ -38,17 +38,17 @@ export const LeadRow: React.FC<LeadRowProps> = ({
   };
 
   return (
-    <tr className="hover:bg-gray-50/80 transition-colors group">
+    <tr className="hover:bg-gray-50/80 dark:hover:bg-white/5 transition-colors group">
       <td className="px-6 py-4 whitespace-nowrap">
         <div className="flex items-center">
-          <div className="flex-shrink-0 h-9 w-9 rounded-full bg-gradient-to-tr from-gray-100 to-gray-200 flex items-center justify-center text-sm font-semibold text-gray-600 border border-gray-200/50">
+          <div className="flex-shrink-0 h-9 w-9 rounded-full bg-gradient-to-tr from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center text-sm font-semibold text-gray-600 dark:text-gray-300 border border-gray-200/50 dark:border-white/10">
             {lead.name.charAt(0).toUpperCase()}
           </div>
           <div className="ml-4">
-            <div className="text-sm font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">
+            <div className="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
               {lead.name}
             </div>
-            <div className="text-xs text-gray-500">{lead.email}</div>
+            <div className="text-xs text-gray-500 dark:text-gray-400">{lead.email}</div>
           </div>
         </div>
       </td>
@@ -60,7 +60,7 @@ export const LeadRow: React.FC<LeadRowProps> = ({
           {lead.source}
         </span>
       </td>
-      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
         {new Date(lead.createdAt).toLocaleDateString('en-US', {
           month: 'short',
           day: 'numeric',
@@ -71,7 +71,7 @@ export const LeadRow: React.FC<LeadRowProps> = ({
         <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
           <button
             onClick={() => onView(lead)}
-            className="p-1.5 text-gray-400 hover:text-primary-600 hover:bg-primary-50 rounded-md transition-colors"
+            className="p-1.5 text-gray-400 dark:text-gray-500 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-500/10 rounded-md transition-colors"
             title="View Details"
           >
             <Eye size={16} />
@@ -81,14 +81,14 @@ export const LeadRow: React.FC<LeadRowProps> = ({
             <>
               <button
                 onClick={() => onEdit(lead)}
-                className="p-1.5 text-gray-400 hover:text-amber-600 hover:bg-amber-50 rounded-md transition-colors"
+                className="p-1.5 text-gray-400 dark:text-gray-500 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-500/10 rounded-md transition-colors"
                 title="Edit Lead"
               >
                 <Edit2 size={16} />
               </button>
               <button
                 onClick={() => onDelete(lead._id)}
-                className="p-1.5 text-gray-400 hover:text-rose-600 hover:bg-rose-50 rounded-md transition-colors"
+                className="p-1.5 text-gray-400 dark:text-gray-500 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-500/10 rounded-md transition-colors"
                 title="Delete Lead"
               >
                 <Trash2 size={16} />
