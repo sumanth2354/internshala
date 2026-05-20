@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useMemo } from 'react';
-import { Plus, Download, Users, CheckCircle, PhoneCall, Award, XCircle, TrendingUp } from 'lucide-react';
+import { Plus, Download, Users, CheckCircle, PhoneCall, Award, XCircle, TrendingUp, PieChart as PieChartIcon } from 'lucide-react';
 import { toast } from 'react-toastify';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { useGetLeads, useCreateLead, useUpdateLead, useDeleteLead } from '../hooks/useLeads';
@@ -304,7 +304,7 @@ const DashboardPage: React.FC = () => {
                 </ResponsiveContainer>
               ) : (
                 <div className="flex flex-col items-center justify-center text-gray-400 h-full">
-                  <PieChart size={48} className="mb-2 opacity-20" />
+                  <PieChartIcon size={48} className="mb-2 opacity-20" />
                   <p className="text-sm">No data available</p>
                 </div>
               )}

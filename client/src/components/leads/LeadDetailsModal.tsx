@@ -51,6 +51,16 @@ export const LeadDetailsModal: React.FC<LeadDetailsModalProps> = ({
       minute: '2-digit',
     });
 
+  const getStatusVariant = (status: string) => {
+    switch (status) {
+      case 'New': return 'info';
+      case 'Contacted': return 'warning';
+      case 'Qualified': return 'success';
+      case 'Lost': return 'danger';
+      default: return 'default';
+    }
+  };
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Lead Details" size="md">
       <div className="space-y-4">
@@ -63,7 +73,7 @@ export const LeadDetailsModal: React.FC<LeadDetailsModalProps> = ({
             <h3 className="text-lg font-bold text-gray-900 dark:text-white">
               {lead.name}
             </h3>
-            <Badge status={lead.status} />
+            <Badge variant={getStatusVariant(lead.status)}>{lead.status}</Badge>
           </div>
         </div>
 

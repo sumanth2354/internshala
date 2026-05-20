@@ -43,8 +43,7 @@ export const LeadTable: React.FC<LeadTableProps> = ({
           icon={<AlertCircle size={48} className="text-red-400" />}
           title="Failed to load leads"
           description="There was an error communicating with the server."
-          actionLabel="Try Again"
-          onAction={onRetry}
+          action={{ label: "Try Again", onClick: onRetry }}
         />
       </div>
     );
@@ -57,8 +56,7 @@ export const LeadTable: React.FC<LeadTableProps> = ({
           icon={<Database size={48} className="text-gray-300" />}
           title="No leads found"
           description="Try adjusting your filters or search query."
-          actionLabel="Clear Filters"
-          onAction={onReset}
+          action={{ label: "Clear Filters", onClick: onReset }}
         />
       </div>
     );

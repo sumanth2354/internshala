@@ -15,7 +15,7 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>('light');
+  const [theme] = useState<Theme>('light');
 
   useEffect(() => {
     // Force light theme
