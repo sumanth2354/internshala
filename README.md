@@ -70,7 +70,15 @@ project/
 ├── .env.example
 └── README.md
 ```
+Example Accounts Created:
+Admin Account (Can create/edit/delete leads and export CSV)
 
+Email: admin@example.com
+Password: password123
+Sales Account (Read-only view of leads)
+
+Email: sales@example.com
+Password: password123
 ## Getting Started
 
 ### Prerequisites
