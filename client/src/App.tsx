@@ -13,6 +13,13 @@ import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
 import { ROUTES } from './utils/constants';
 
+import { Outlet } from 'react-router-dom';
+import LeadsPage from './pages/LeadsPage';
+import CustomersPage from './pages/CustomersPage';
+import ReportsPage from './pages/ReportsPage';
+import AnalyticsPage from './pages/AnalyticsPage';
+import SettingsPage from './pages/SettingsPage';
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -26,12 +33,12 @@ const AppLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   return (
-    <div className="min-h-screen bg-[#f9fafb] flex">
+    <div className="min-h-screen bg-[#f9fafb] dark:bg-transparent flex">
       <Sidebar isOpen={sidebarOpen} onToggle={() => setSidebarOpen(!sidebarOpen)} />
       <div className="flex-1 flex flex-col min-w-0 transition-all duration-300">
         <Navbar onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
         <main className="flex-1 overflow-auto">
-          <DashboardPage />
+          <Outlet />
         </main>
       </div>
     </div>
@@ -47,15 +54,25 @@ const App: React.FC = () => {
             <Routes>
               <Route path={ROUTES.LOGIN} element={<LoginPage />} />
               <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
+              
+              {/* Protected Workspace Routes */}
               <Route
-                path={ROUTES.DASHBOARD}
+                path="/"
                 element={
                   <ProtectedRoute>
                     <AppLayout />
                   </ProtectedRoute>
                 }
-              />
-              <Route path="*" element={<Navigate to={ROUTES.DASHBOARD} replace />} />
+              >
+                <Route index element={<DashboardPage />} />
+                <Route path="leads" element={<LeadsPage />} />
+                <Route path="customers" element={<CustomersPage />} />
+                <Route path="reports" element={<ReportsPage />} />
+                <Route path="analytics" element={<AnalyticsPage />} />
+                <Route path="settings" element={<SettingsPage />} />
+              </Route>
+
+              <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </BrowserRouter>
 

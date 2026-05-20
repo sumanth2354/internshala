@@ -13,9 +13,13 @@
   }
 
   body {
-    @apply bg-[#f9fafb] text-[#111827];
+    @apply bg-[#f9fafb] text-[#111827] transition-colors duration-300;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  .dark body {
+    @apply bg-gradient-to-br from-gray-950 via-primary-950 to-gray-950 text-white min-h-screen;
   }
 
   /* Custom minimal scrollbar */
@@ -36,6 +40,14 @@
     @apply bg-gray-300;
   }
 
+  .dark ::-webkit-scrollbar-thumb {
+    @apply bg-white/20;
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    @apply bg-white/30;
+  }
+
   input[type="search"]::-webkit-search-cancel-button {
     -webkit-appearance: none;
   }
@@ -48,11 +60,11 @@
 
   /* Premium SaaS Card Style */
   .card {
-    @apply bg-white rounded-xl border border-gray-200 shadow-[0_1px_3px_0_rgba(0,0,0,0.05)] transition-shadow duration-200;
+    @apply bg-white dark:bg-white/5 dark:backdrop-blur-xl rounded-xl border border-gray-200 dark:border-white/10 shadow-[0_1px_3px_0_rgba(0,0,0,0.05)] dark:shadow-2xl transition-shadow duration-200;
   }
   
   .card-hover {
-    @apply hover:shadow-[0_4px_6px_-1px_rgba(0,0,0,0.05),0_2px_4px_-1px_rgba(0,0,0,0.03)] hover:border-gray-300 transition-all duration-200;
+    @apply hover:shadow-[0_4px_6px_-1px_rgba(0,0,0,0.05),0_2px_4px_-1px_rgba(0,0,0,0.03)] dark:hover:shadow-primary-500/20 hover:border-gray-300 dark:hover:border-white/20 transition-all duration-200;
   }
 
   /* Premium Focus Rings */

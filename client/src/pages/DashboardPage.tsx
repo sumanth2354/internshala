@@ -21,27 +21,32 @@ interface StatCardProps {
   icon: React.ReactNode;
   trend?: string;
   trendUp?: boolean;
+  isLoading?: boolean;
 }
 
-const StatCard: React.FC<StatCardProps> = ({ label, value, icon, trend, trendUp }) => (
+const StatCard: React.FC<StatCardProps> = ({ label, value, icon, trend, trendUp, isLoading }) => (
   <div className="card p-5 group card-hover relative overflow-hidden">
     <div className="flex items-center justify-between mb-4 relative z-10">
-      <div className="p-2.5 rounded-xl bg-gray-50 border border-gray-100 text-gray-600 group-hover:scale-110 group-hover:text-primary-600 transition-all duration-300">
+      <div className="p-2.5 rounded-xl bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 text-gray-600 dark:text-gray-300 group-hover:scale-110 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-all duration-300">
         {icon}
       </div>
       {trend && (
-        <div className={`flex items-center gap-1 text-xs font-semibold px-2 py-1 rounded-full ${trendUp ? 'bg-emerald-50 text-emerald-600' : 'bg-rose-50 text-rose-600'}`}>
+        <div className={`flex items-center gap-1 text-xs font-semibold px-2 py-1 rounded-full ${trendUp ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400' : 'bg-rose-50 text-rose-600 dark:bg-rose-900/30 dark:text-rose-400'}`}>
           <TrendingUp size={12} className={trendUp ? '' : 'rotate-180'} />
           {trend}
         </div>
       )}
     </div>
     <div className="relative z-10">
-      <p className="text-3xl font-bold text-gray-900 tracking-tight">{value}</p>
-      <p className="text-sm font-medium text-gray-500 mt-1">{label}</p>
+      {isLoading ? (
+        <div className="h-9 w-16 bg-gray-200 dark:bg-white/10 rounded animate-pulse" />
+      ) : (
+        <p className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">{value}</p>
+      )}
+      <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mt-1">{label}</p>
     </div>
     {/* Subtle decorative gradient */}
-    <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-gradient-to-tl from-gray-50 to-transparent rounded-full opacity-50 group-hover:scale-150 transition-transform duration-500 ease-out" />
+    <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-gradient-to-tl from-gray-50 dark:from-white/5 to-transparent rounded-full opacity-50 group-hover:scale-150 transition-transform duration-500 ease-out" />
   </div>
 );
 
@@ -178,10 +183,10 @@ const DashboardPage: React.FC = () => {
         {/* Page Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">
               Dashboard
             </h1>
-            <p className="text-sm text-gray-500 mt-1.5 font-medium">
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1.5 font-medium">
               Overview of your sales pipeline and recent activity
             </p>
           </div>
@@ -223,6 +228,7 @@ const DashboardPage: React.FC = () => {
             icon={<Users size={20} />}
             trend="+12%"
             trendUp={true}
+            isLoading={statsQuery.isLoading}
           />
           <StatCard
             label="New Leads"
@@ -230,6 +236,7 @@ const DashboardPage: React.FC = () => {
             icon={<CheckCircle size={20} />}
             trend="+5%"
             trendUp={true}
+            isLoading={statsQuery.isLoading}
           />
           <StatCard
             label="Qualified"
@@ -237,11 +244,13 @@ const DashboardPage: React.FC = () => {
             icon={<Award size={20} />}
             trend="+18%"
             trendUp={true}
+            isLoading={statsQuery.isLoading}
           />
           <StatCard
             label="Contacted"
             value={stats.contacted}
             icon={<PhoneCall size={20} />}
+            isLoading={statsQuery.isLoading}
           />
           <StatCard
             label="Lost"
@@ -249,6 +258,7 @@ const DashboardPage: React.FC = () => {
             icon={<XCircle size={20} />}
             trend="-2%"
             trendUp={false}
+            isLoading={statsQuery.isLoading}
           />
         </div>
 
@@ -256,7 +266,7 @@ const DashboardPage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-slide-up" style={{ animationDelay: '100ms' }}>
           {/* Growth Chart */}
           <div className="card p-6 lg:col-span-2">
-            <h3 className="text-lg font-bold text-gray-900 mb-6 tracking-tight">Lead Growth</h3>
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-6 tracking-tight">Lead Growth</h3>
             <div className="h-72 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={leadGrowthData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
@@ -280,7 +290,7 @@ const DashboardPage: React.FC = () => {
 
           {/* Conversion Chart */}
           <div className="card p-6">
-            <h3 className="text-lg font-bold text-gray-900 mb-6 tracking-tight">Conversion Overview</h3>
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-6 tracking-tight">Conversion Overview</h3>
             <div className="h-72 w-full flex flex-col items-center justify-center relative">
               {pieData.length > 0 ? (
                 <ResponsiveContainer width="100%" height="100%">
@@ -311,8 +321,8 @@ const DashboardPage: React.FC = () => {
               {pieData.length > 0 && (
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                   <div className="text-center">
-                    <p className="text-3xl font-bold text-gray-900">{stats.total}</p>
-                    <p className="text-xs text-gray-500 font-medium">Total</p>
+                    <p className="text-3xl font-bold text-gray-900 dark:text-white">{stats.total}</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">Total</p>
                   </div>
                 </div>
               )}
@@ -322,9 +332,9 @@ const DashboardPage: React.FC = () => {
 
         {/* Leads Table Section */}
         <div className="card animate-slide-up" style={{ animationDelay: '200ms' }}>
-          <div className="p-5 border-b border-gray-200">
+          <div className="p-5 border-b border-gray-200 dark:border-white/10">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-bold text-gray-900 tracking-tight">Recent Leads</h3>
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white tracking-tight">Recent Leads</h3>
             </div>
             
             <LeadFilters
