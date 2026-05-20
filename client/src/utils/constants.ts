@@ -1,4 +1,4 @@
-export const API_BASE_URL = import.meta.env.VITE_API_URL ?? 'https://smart-leads-backend-89lw.onrender.com/api';
+export const API_BASE_URL = 'https://smart-leads-backend-89lw.onrender.com/api';
 
 export const TOKEN_KEY = 'smart_leads_token';
 export const THEME_KEY = 'smart_leads_theme';
