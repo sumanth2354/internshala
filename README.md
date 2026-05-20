@@ -79,6 +79,10 @@ Sales Account (Read-only view of leads)
 
 Email: sales@example.com
 Password: password123
+
+Note: Backend may take 30–60 seconds to wake up on first request due to Render free tier.
+
+
 ## Getting Started
 
 ### Prerequisites
@@ -232,6 +236,4 @@ docker-compose down
 | `npm run build` | Build for production |
 | `npm run preview` | Preview production build |
 
-## License
 
-MIT
